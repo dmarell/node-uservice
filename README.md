@@ -1,4 +1,4 @@
-# Node micro service template
+# Node.js Micro Service Template with Docker and MongoDB
 
 Using Express 4.0 Router to build an API
 
@@ -13,7 +13,7 @@ Inspired from a [tutorial](http://scotch.io/tutorials/javascript/build-a-restful
 
 - Clone the repo: `git clone https://github.com/dmarell/node-microservice.git`
 - Build: `npm install`
-- Start mongo in a separate terminal window: `mongod`
+- Start mongo in a separate terminal window: `mongod` (requires a local MongoDB installation)
 - Start the server: `npm start`
 
 ## Test the API
@@ -51,9 +51,9 @@ $ curl http://192.168.99.100:8081/api
 ```
 $ docker-compose build
 $ docker-compose up -d
-Starting nodeapi_mongo-data_1
-Starting nodeapi_mongo_1
-Starting nodeapi_server_1
+Starting nodeuservice_mongo-data_1
+Starting nodeuservice_mongo_1
+Starting nodeuservice_server_1
 ```
 
 Verify like above: `curl http://192.168.99.100:8081/api`
