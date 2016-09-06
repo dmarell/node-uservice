@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  mongo-data:
+    image: mongo
+    entrypoint: 'tail -f /var/log/bootstrap.log'
+  mongo:
+    image: mongo
+    volumes_from:
+      - mongo-data
+  server:
+    build: .
+    links:
+      - mongo:mongo
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "8081:8080"
