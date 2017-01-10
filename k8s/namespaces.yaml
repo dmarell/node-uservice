@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: node-uservice-it
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: node-uservice-stage
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: node-uservice-prod

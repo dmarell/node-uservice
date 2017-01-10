@@ -1,0 +1,41 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: server
+spec:
+  type: NodePort
+  ports:
+  - port: 9090
+    targetPort: api-port
+  selector:
+    name: server
+
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: server
+      labels:
+        name: server
+    spec:
+      containers:
+      - name: server
+        image: PLACEHOLDER_IMAGE_TAG
+        env:
+        - name: NODE_ENV
+          value: PLACEHOLDER_NODE_ENV
+        - name: VERSION
+          value: PLACEHOLDER_VERSION
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9090
+          name: api-port

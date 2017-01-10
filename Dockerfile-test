@@ -4,5 +4,8 @@ WORKDIR /server
 COPY app/ /server/app/
 RUN npm install
 
+COPY test/ /server/test/
+ENV NODE_ENV it
+
 EXPOSE 8080
 CMD ["npm", "start"]
