@@ -29,7 +29,7 @@ Start the server:
 ```
 $ npm start
 ...
-Server is up on port 8080
+Server is up on port 9090
 ```
 
 Run integration tests:
@@ -40,14 +40,25 @@ $ npm run test:it
 
 ## Test the API
 
+Check signs of life:
+```
+$ curl localhost:9090
+{"message":"Welcome to node-uservice API"}
+```
+
+```
+$ curl localhost:9090/health
+{"ok":true}
+```
+
 Add a bear:
 ```
-$ curl --data 'name=Bamse' http://localhost:8080/api/bears
+$ curl --data 'name=Bamse' localhost:9090/bears
 {"message":"Bear created! name: Bamse"}
 ```
 
 Read bears:
 ```
-$ curl http://192.168.99.100:8081/api/bears
+$ curl localhost:9090/bears
 [{"_id":"57ce7f864551911e00000001","name":"Bamse","__v":0}]
 ```
