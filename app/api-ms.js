@@ -3,7 +3,6 @@ var express = require('express');
 var config = require('./config');
 var bodyParser = require('body-parser');
 var router = express.Router();
-var kpi = require('./kpi');
 var mongoose = require('mongoose');
 
 var allowCrossDomain = function (req, res, next) {
@@ -67,9 +66,6 @@ module.exports = function (app) {
 
         res.json(result);
     });
-
-    // KPIs
-    router.get('/kpis', kpi.getKpis);
 
     // test route to make sure everything is working (accessed at GET http://localhost:9090/)
     router.get('/', function (req, res) {
