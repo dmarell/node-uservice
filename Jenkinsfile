@@ -94,14 +94,12 @@ if (env.BRANCH_NAME != 'master') {
 
 node {
     stage 'Test'
+    sh("kubectl create namespace ${projectPrefix}-it && true");
     checkout scm
     sh("docker build -t ${testServerImageTag} --file Dockerfile-test .")
     sh("gcloud docker push ${testServerImageTag}")
 
     createDiskIfNonExisting("${clusterName}-${itNamespace}-mongodb", '1GB')
-
-    // Add namespaces in case they don't exist
-    sh("kubectl apply -f k8s/namespaces.yaml")
 
     // Substitute parameters in Kubernetes config files
     configureK8s(clusterName, itNamespace, testServerImageTag, itConfigurationEnv, deployTimestamp)
@@ -122,6 +120,7 @@ node {
         error("Integration test failed");
     }
     println 'Integration test succeeded'
+    sh("kubectl delete namespace ${projectPrefix}-it");
 }
 
 node {
@@ -133,6 +132,7 @@ node {
 
 stage 'Stage environment'
 node {
+    sh("kubectl create namespace ${projectPrefix}-stage");
     createDiskIfNonExisting("${clusterName}-${stageNamespace}-mongodb", '1GB')
     checkout scm
 
@@ -148,6 +148,7 @@ input message: 'Deploy to production?'
 
 stage 'Production environment'
 node {
+    sh("kubectl create namespace ${projectPrefix}-prod");
     createDiskIfNonExisting("${clusterName}-${prodNamespace}-mongodb", '1GB')
     checkout scm
 
