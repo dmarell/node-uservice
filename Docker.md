@@ -4,7 +4,7 @@
 
 Start mongo:
 ```
-$ docker rm -f mongo && true >& /dev/null
+$ (docker rm -f mongo || true) >& /dev/null
 $ docker run --name mongo -d mongo
 ```
 
